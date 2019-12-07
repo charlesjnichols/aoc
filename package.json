@@ -1,0 +1,11 @@
+{
+  "name": "aoc",
+  "version": "1.0.0",
+  "description": "aco 2019",
+  "main": "day1.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "",
+  "license": "ISC"
+}
