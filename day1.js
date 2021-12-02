@@ -7,12 +7,18 @@ const inputs = fs
   .split(/\r?\n/)
   .map((x) => Number.parseInt(x));
 
-const by_sum = (index, window) => _.sum(inputs.slice(index, index + window));
+const by_sum = (index, window = 1) =>
+  _.sum(inputs.slice(index - 1, index - 1 + window)) <
+  _.sum(inputs.slice(index, index + window))
+    ? 1
+    : 0;
 
-const part1 = _.map(_.range(1, inputs.length), (index) => by_sum(index-1, 1) < by_sum(index, 1) ? 1 : 0);
-console.log(_.sum(part1));
+const part1 = _(_.range(1, inputs.length))
+  .map((index) => by_sum(index))
+  .sum();
+console.log(part1);
 
-const part2 = _.map(inputs.slice(1, inputs.length - 2), (value, index) =>
-    by_sum(index - 1, 3) < by_sum(index, 3) ? 1 : 0
-);
-console.log(_.sum(part2));
+const part2 = _(_.range(1, inputs.length - 2))
+  .map((index) => by_sum(index, 3))
+  .sum();
+console.log(part2);
