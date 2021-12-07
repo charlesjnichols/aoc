@@ -2,7 +2,7 @@
   "name": "aoc",
   "version": "1.0.0",
   "description": "aco 2019",
-  "main": "day1.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha test"
   },
