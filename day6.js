@@ -5,25 +5,21 @@ const initial =
   "3,4,3,1,2".split(",").map((i) => Number.parseInt(i));
 // console.log(initial);
 
-const end = 1;
+const days = [];
 
-const fish_holder = [initial];
+_.range(0, 9).forEach((day) => {
+  days[day] = initial.filter((x) => x === day).length;
+});
 
-for (var day = 0; day < 256; day++) {
-  fish_holder[day + 1] = [];
-  for (var generation = 0; generation <= day; generation++) {
-    fish_holder[generation].forEach((cycle, i) => {
-      if (cycle === 0) {
-        fish_holder[generation][i] = 6;
-        fish_holder[day + 1].push(8);
-      } else {
-        fish_holder[generation][i] = cycle - 1;
-      }
-    });
-  }
-  //   console.log(generation, fish_holder.length);
-}
+// console.log(days);
 
-// fish_holder.forEach((i) => console.log(i));
-// console.log(fish_holder[0], fish_holder[1]);
-console.log(_.sum(fish_holder.map(days => days.length)));
+_.range(0, 80).forEach(() => {
+  const day0 = days[0];
+  _.range(1, 9).map((i) => {
+    days[i - 1] = days[i];
+  });
+  days[6] += day0;
+  days[8] = day0;
+});
+
+console.log(_.sum(days));
