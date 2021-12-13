@@ -6,7 +6,7 @@
     .toString("utf8")
     .split(/\r?\n/)
     .reduce((acc, x) => {
-        const [start, end] = x.split("-");
+        const [start, end] = x.split(" ");
         if (end != "start") {
         if (acc[start]) {
             acc[start].push(end);
