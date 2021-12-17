@@ -12,7 +12,6 @@
     "dijkstrajs": "^1.0.2",
     "dot-env": "0.0.1",
     "dotenv": "^10.0.0",
-    "lodash": "^4.17.15",
-    "neo4j-driver": "^4.4.1"
+    "lodash": "^4.17.15"
   }
 }
