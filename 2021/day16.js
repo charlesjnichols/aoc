@@ -49,6 +49,17 @@ const literal = (input, word) => {
 
 let versions = 0;
 
+const packet_version_rules = {
+  0: (i) => i.length ? i.reduce((acc, x) => acc + x) : 0,
+  1: (i) => i.reduce((acc, x) => acc * x),
+  2: (i) => _.min(i),
+  3: (i) => _.max(i),
+  4: (i) => binary(literal(i, "")),
+  5: (i) => i[0] > i[1] ? 1 : 0,
+  6: (i) => i[0] < i[1] ? 1 : 0,
+  7: (i) => i[0] === i[1] ? 1 : 0,
+};
+
 const packet = (input) => {
   if (!input.length) return;
 
@@ -58,22 +69,29 @@ const packet = (input) => {
   const packet_type = header(input);
 
   // console.log(input.length, packet_version, packet_type);
+  let pp = [];
 
   if (packet_type === 4) {
-    const num = binary(literal(input, ""));
+    pp = [packet_version_rules[4](input)];
   } else {
     if (read(input, 1) === "0") {
-      packet(
-        read(input, binary(read(input, 15)))
-          .split("")
-          .map(Number)
-      );
+      pp = [
+        packet(
+          read(input, binary(read(input, 15)))
+            .split("")
+            .map(Number)
+        ),
+      ];
     } else {
-      _.range(0, binary(read(input, 11))).forEach(() => packet(input));
+      pp = _.range(0, binary(read(input, 11))).map(() => packet(input));
     }
+    const workd = _.flatMapDeep(pp).filter(x => x != undefined);
+    pp = packet_version_rules[packet_type](workd);
+    console.log(packet_type, workd, pp);
   }
-  if (input.includes(1)) packet(input);
+  if (input.includes(1)) return [...pp, packet(input)];
+  return pp;
 };
 
-packet(inputs);
-console.log(versions);
+console.log(packet(inputs));
+// console.log(versions);
