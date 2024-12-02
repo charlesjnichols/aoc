@@ -1,22 +1,22 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
-    "name": "Node.js Sample",
-    "dockerFile": "Dockerfile",
+	"name": "Go",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.23-bookworm"
 
-    // Specifies a list of ports that should be published.
-    "appPort": [],
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
 
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 
-    // Use 'settings' to set *default* container specific settings.json values on container create. 
-    // You can edit these settings after create using File > Preferences > Settings > Remote.
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-    },
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "go version",
 
-    // Specifies a command that should be run after the container has been created.
-    "postCreateCommand": "npm install",
+	// Configure tool-specific properties.
+	// "customizations": {},
 
-    "extensions": [
-        "dbaeumer.vscode-eslint",
-        "formulahendry.code-runner"
-    ]
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
