@@ -11,7 +11,7 @@ import (
 	"github.com/samber/lo"
 )
 
-func main() {
+func day0() {
 
 	contents, err := os.ReadFile("day1-page.txt")
 	if err != nil {
