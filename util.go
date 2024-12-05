@@ -15,6 +15,12 @@ func RemoveIndex(s []int, index int) []int {
 	return append(ret, s[index+1:]...)
 }
 
+func RemoveStringIndex(s []string, index int) []string {
+	ret := make([]string, 0)
+	ret = append(ret, s[:index]...)
+	return append(ret, s[index+1:]...)
+}
+
 func stringToIntegers(lines []string) ([]int, error) {
 	integers := make([]int, 0, len(lines))
 	for _, line := range lines {

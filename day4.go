@@ -12,7 +12,7 @@ type coord struct {
 	y int
 }
 
-func main() {
+func day4() {
 	contents, err := os.ReadFile("day4.txt")
 	if err != nil {
 		log.Fatal(err)
