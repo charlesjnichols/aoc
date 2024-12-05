@@ -21,6 +21,9 @@ func RemoveStringIndex(s []string, index int) []string {
 	return append(ret, s[index+1:]...)
 }
 
+func InsertStringIndex(array []string, element string, i int) []string {
+	return append(array[:i], append([]string{element}, array[i:]...)...)
+}
 func stringToIntegers(lines []string) ([]int, error) {
 	integers := make([]int, 0, len(lines))
 	for _, line := range lines {

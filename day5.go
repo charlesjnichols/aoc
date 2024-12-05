@@ -29,7 +29,8 @@ func main() {
 	contents, _ = os.ReadFile("day5-2.txt")
 	lines = strings.Split(strings.TrimSpace(string(contents)), "\n")
 
-	sum := 0
+	corrent_sum := 0
+	wrong_sum := 0
 
 	for _, s := range lines {
 		pages := strings.Split(s, ",")
@@ -37,10 +38,37 @@ func main() {
 		if test_order(print_order, pages) {
 			// get the middle number from the current line and add to total
 			m, _ := strconv.Atoi(pages[len(pages)/2])
-			sum += m
+			corrent_sum += m
+		} else {
+			// bone head way is to just create all possible combinations of the array
+			// and test each one individually
+			//
+			// https://en.wikipedia.org/wiki/Heap%27s_algorithm
+			//
+			// "it's a trap"
+			//
+			// instead rebuild the order one at a time testing as you go
+			//
+			fixed := []string{pages[0]}
+
+			for _, next := range pages[1:] {
+				for i := range len(fixed) + 1 {
+					wrong := make([]string, len(fixed))
+					copy(wrong, fixed)
+
+					wrong = InsertStringIndex(wrong, next, i)
+					if test_order(print_order, wrong) {
+						fixed = wrong
+						break
+					}
+				}
+			}
+			m, _ := strconv.Atoi(fixed[len(fixed)/2])
+			wrong_sum += m
 		}
 	}
-	fmt.Println(sum)
+	fmt.Println(corrent_sum)
+	fmt.Println(wrong_sum)
 }
 
 func test_order(print_order map[string][]string, pages []string) bool {
