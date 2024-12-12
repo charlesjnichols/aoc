@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func main() {
+func day5() {
 	contents, _ := os.ReadFile("day5-1.txt")
 	lines := strings.Split(strings.TrimSpace(string(contents)), "\n")
 
